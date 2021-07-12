@@ -1,0 +1,23 @@
+version: 2
+services:
+  nextjs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nextjs
+    container_name: nextjs
+    restart: always
+    ports:
+      - "3000:3000"
+    networks:
+      - jenkins-test
+
+  jenkins:
+    image: jenkins/jenkins
+    container_name: jenkins
+    ports: "8080:8080"
+    networks:
+      - jenkins-test
+networks:
+  jenkins-test:
+    driver: bridge
